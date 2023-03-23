@@ -1,0 +1,160 @@
+{
+  "databaseChangeLog" : [
+    {
+      "changeSet": {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "hospede"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202303230939",
+        "author": "ravi-oly",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "hospede",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "nome",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "documento",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "telefone",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "total_gasto",
+                    "type": "numeric(12,2)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "registro"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "hospede"
+            }
+          }
+        ],
+        "id": "202303230950",
+        "author": "ravi-oly",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "registro",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "id_hospede",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_registro_hospede",
+                      "references": "hospede(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "checkin",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "checkout",
+                    "type": "timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "adicional_veiculo",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "valor_total",
+                    "type": "numeric(12,2)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
