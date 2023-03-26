@@ -57,6 +57,9 @@ public class HospedeService {
     }
 
     public List<HospedeDTO> getByQuery(String termo) {
+        if (termo == null || termo.isEmpty() || termo.isBlank()) {
+            return getAll();
+        }
         return repository.findAllByNomeIgnoreCaseContainsOrDocumentoIgnoreCaseContainsOrTelefoneIgnoreCaseContains(termo, termo, termo).
                 stream().map(h -> new HospedeDTO(h.getId(), h.getNome(), h.getDocumento(), h.getTelefone())).
                 collect(Collectors.toList());

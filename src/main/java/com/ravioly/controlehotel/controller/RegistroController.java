@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/registro")
+@RequestMapping("/api/registro")
 public class RegistroController {
 
     @Autowired

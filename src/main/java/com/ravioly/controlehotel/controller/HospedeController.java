@@ -8,17 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hospedes")
+@RequestMapping("/api/hospedes")
 public class HospedeController {
 
 
     @Autowired
     private HospedeService service;
-
-    @GetMapping("/all")
-    public List<HospedeDTO> getAllHospedes() {
-        return service.getAll();
-    }
 
     @PostMapping
     public HospedeDTO addHospede(@RequestBody HospedeDTO hospede) {
@@ -41,7 +36,7 @@ public class HospedeController {
     }
 
     @GetMapping
-    public List<HospedeDTO> getByQuery(@RequestParam String termo) {
+    public List<HospedeDTO> getByQuery(@RequestParam(required = false) String termo) {
         return service.getByQuery(termo);
     }
 }

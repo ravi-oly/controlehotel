@@ -11,7 +11,7 @@ import java.util.List;
 public interface HospedeRepository extends JpaRepository<HospedeEntity, Long> {
     List<HospedeEntity> findAllByNomeIgnoreCaseContainsOrDocumentoIgnoreCaseContainsOrTelefoneIgnoreCaseContains(String nome, String documento, String telefone);
     List<HospedeEntity> findAllByRegistros_DataSaidaNull();
-    @Query(value = "select h.* \n" +
+    @Query(value = "select distinct h.* \n" +
             "from hospede h, registro r \n" +
             "where r.id_hospede = h.id \n" +
             "and r.checkout is not null \n" +
